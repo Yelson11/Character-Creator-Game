@@ -16,7 +16,6 @@ MÉTODOS DEL CONTROLADOR
 +getWeapons(): ArrayList<Weapon>
 +getCharacter(String pName): IPrototype<Character>
 +getWeapon(String pCharacter, int pWeapon): Weapon
-+startPrototypes: void
 +createCharacter(Character pCharacter): void
 +createPrototype(String pName, ArrayList<Weapon> pWeapons):void
 
@@ -31,13 +30,6 @@ public class Controller {
         startPrototypes();
     }
     
-    
-    
-    //inicia los prototipos
-    public void startPrototypes(){
-        createWeapons();
-        createCharacters();
-    }
     
     //Entradas: nombre del personaje:String
     //Salidas : personaje solicitado: IPrototype<Character>
@@ -75,6 +67,12 @@ public class Controller {
             clone.addUsedWeapon(pWeapons.get(i));
         }
         characterList.put(pName, clone);
+    }
+    
+    //inicia los prototipos
+    private void startPrototypes(){
+        createWeapons();
+        createCharacters();
     }
     
     //Crea los prototipos de armas predefinidos en el juego
