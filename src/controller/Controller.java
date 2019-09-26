@@ -1,13 +1,33 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import library.IPrototype;
 import library.Weapon;
 import library.WeaponFactory;
 import library.Character;
 import library.CharacterFactory;
 
+
+/*
+MÉTODOS DEL CONTROLADOR
+
++getCharacters(): ArrayList<IPrototype<Character>>
++getWeapons(): ArrayList<Weapon>
++getCharacter(String pName): IPrototype<Character>
++getWeapon(String pCharacter, int pWeapon): Weapon
++startPrototypes: void
++createCharacter(String pName, int pLife, int pLevel,
+        int pSpace, int pCost, ArrayList<String> images,
+        ArrayList<String> weapons): void
+
+
+
+*/
+
 public class Controller {
+    
+    private  HashMap<String,IPrototype<Character>> CharacterList = new HashMap<>();
     
     //inicia los prototipos
     public void startPrototypes(){
@@ -15,16 +35,43 @@ public class Controller {
         createCharacters();
     }
     
+    //Entradas: nombre del personaje:String
+    //Salidas : personaje solicitado: IPrototype<Character>
+    public IPrototype<Character> getCharacter(String pName){
+        return CharacterList.get(pName);
+    }
     
-    //Retorna una lista con todos los personajes precreados
+    //Entradas: nombre del personaje:String, indice del arma: int
+    //Salidas : arma solicitada:Weapon
+    public Weapon getWeapon(String pCharacter, int pWeapon){
+        Character current=  (Character) CharacterList.get(pCharacter);
+        return current.getUsedWeapons().get(pWeapon);
+    }
+    
+    //Salidas : lista con todos los personajes precreados
     public ArrayList<IPrototype<Character>> getCharacters(){
         return CharacterFactory.getValues();
     }
     
-    //Retorna una lista con todos las armas precreados
+    //Salidas : lista con todos las armas precreados
     public ArrayList<Weapon> getWeapons(){
         return WeaponFactory.getValues();
     } 
+    
+    //Entradas: atributos del personaje a crear
+    //Crea un nuevo personaje
+    public void createCharacter(String pName, int pLife, int pLevel,
+        int pSpace, int pCost, String image, ArrayList<String> weapons){
+        
+        IPrototype<Character> character= new Character.CharacterBuilder()
+                .addName(pName)
+                .addLife(pLife)
+                .addLevel(pLevel)
+                .addSpace(pSpace)
+                .addCost(pCost)
+                .addImage(image)
+                .build();
+    }
     
     //Crea los prototipos de armas predefinidos en el juego
     private void createWeapons(){
@@ -502,7 +549,5 @@ public class Controller {
         CharacterFactory.addPrototype("amaterasu", amaterasu);
         CharacterFactory.addPrototype("estarossa", estarossa);  
     }
-    
-    
     
 }
