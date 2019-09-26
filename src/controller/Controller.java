@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.ArrayList;
 import library.IPrototype;
 import library.Weapon;
 import library.WeaponFactory;
@@ -8,11 +9,22 @@ import library.CharacterFactory;
 
 public class Controller {
     
-    
+    //inicia los prototipos
     public void startPrototypes(){
         createWeapons();
         createCharacters();
     }
+    
+    
+    //Retorna una lista con todos los personajes precreados
+    public ArrayList<IPrototype<Character>> getCharacters(){
+        return CharacterFactory.getValues();
+    }
+    
+    //Retorna una lista con todos las armas precreados
+    public ArrayList<Weapon> getWeapons(){
+        return WeaponFactory.getValues();
+    } 
     
     //Crea los prototipos de armas predefinidos en el juego
     private void createWeapons(){
@@ -488,7 +500,7 @@ public class Controller {
         CharacterFactory.addPrototype("meliodas" , meliodas);
         CharacterFactory.addPrototype("scarlett" , scarlett);
         CharacterFactory.addPrototype("amaterasu", amaterasu);
-        CharacterFactory.addPrototype("estarossa", estarossa);   
+        CharacterFactory.addPrototype("estarossa", estarossa);  
     }
     
     
