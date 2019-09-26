@@ -26,6 +26,12 @@ MÉTODOS DEL CONTROLADOR
 public class Controller {
     
     private  HashMap<String,IPrototype<Character>> characterList = new HashMap<>();
+
+    public Controller() {
+        startPrototypes();
+    }
+    
+    
     
     //inicia los prototipos
     public void startPrototypes(){
