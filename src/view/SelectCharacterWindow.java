@@ -37,8 +37,8 @@ public class SelectCharacterWindow extends javax.swing.JFrame{
     public SelectCharacterWindow() throws IOException {
         initComponents();
         controller = Controller.getInstace();
-        background = ImageIO.read(new File("src/images/other/fondo.jpeg"));
-        background = background.getScaledInstance(600, 500, Image.SCALE_DEFAULT); 
+        background = ImageIO.read(new File("src/images/other/creationBasement.jpg"));
+        background = background.getScaledInstance(900, 600, Image.SCALE_DEFAULT); 
     }
     
     @Override
@@ -81,7 +81,7 @@ public class SelectCharacterWindow extends javax.swing.JFrame{
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(166, 166, 166)
                 .addComponent(btnLeft)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 440, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 420, Short.MAX_VALUE)
                 .addComponent(btnRight)
                 .addGap(128, 128, 128))
         );
@@ -92,7 +92,7 @@ public class SelectCharacterWindow extends javax.swing.JFrame{
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnLeft, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnRight, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(263, Short.MAX_VALUE))
+                .addContainerGap(287, Short.MAX_VALUE))
         );
 
         pack();

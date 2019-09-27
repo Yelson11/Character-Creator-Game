@@ -102,11 +102,11 @@ public class Controller {
             indexCharacter = CharacterFactory.getValues().size() - 1;
         Character character = (Character) CharacterFactory.getValues().get(indexCharacter);
         image = ImageIO.read(new File(character.getImages().get(0)));
-        image = image.getScaledInstance(150, 150, Image.SCALE_DEFAULT); 
+        image = image.getScaledInstance(250, 250, Image.SCALE_DEFAULT); 
     }
     
     public void draw(Graphics g){
-        g.drawImage(image, 100, 100, null);
+        g.drawImage(image, 300, 220, null);
     }
     
     //Crea los prototipos de armas predefinidos en el juego
