@@ -1,7 +1,13 @@
 package controller;
 
+import java.awt.Graphics;
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import library.IPrototype;
 import library.Weapon;
 import library.WeaponFactory;
@@ -23,13 +29,26 @@ MÉTODOS DEL CONTROLADOR
 */
 
 public class Controller {
+
     
     private  HashMap<String,IPrototype<Character>> characterList = new HashMap<>();
+    private Image image;
+    private static Controller controller;
+    private static int indexCharacter;
 
-    public Controller() {
+    public Controller() throws IOException {
         startPrototypes();
+        image = ImageIO.read(new File("src/images/characters/amaterasu.png"));
+        image = image.getScaledInstance(150, 150, Image.SCALE_DEFAULT);
+        indexCharacter = 0; 
     }
     
+    public static Controller getInstace() throws IOException {
+        if(controller == null){
+            controller = new Controller();
+        }
+        return controller;
+    }
     
     //Entradas: nombre del personaje:String
     //Salidas : personaje solicitado: IPrototype<Character>
@@ -73,6 +92,21 @@ public class Controller {
     private void startPrototypes(){
         createWeapons();
         createCharacters();
+    }
+    
+    public void changeImage(int num) throws IOException{
+        indexCharacter += num;
+        if (indexCharacter == CharacterFactory.getValues().size())
+            indexCharacter = 0;
+        else if (indexCharacter < 0)
+            indexCharacter = CharacterFactory.getValues().size() - 1;
+        Character character = (Character) CharacterFactory.getValues().get(indexCharacter);
+        image = ImageIO.read(new File(character.getImages().get(0)));
+        image = image.getScaledInstance(150, 150, Image.SCALE_DEFAULT); 
+    }
+    
+    public void draw(Graphics g){
+        g.drawImage(image, 100, 100, null);
     }
     
     //Crea los prototipos de armas predefinidos en el juego
