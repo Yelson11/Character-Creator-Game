@@ -1,19 +1,46 @@
 package view;
 
+import controller.Controller;
+import java.awt.Image;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import library.Weapon;
+import library.WeaponFactory;
+
 public class NewCharacter extends javax.swing.JFrame {
 
     /**
      * Creates new form NewCharacter
      */
     private int image1Index=0, image2Index=1;
-    private String urlImage;
-    public NewCharacter() {
+    private String urlImage="";
+    public NewCharacter() throws IOException {
         initComponents();
+        Controller c= new Controller();
         chargePrototypes();
+        
     }
     
     public void chargePrototypes(){
+        ArrayList<Weapon> list = WeaponFactory.getValues();
+        this.setLocationRelativeTo(null);
         
+        ImageIcon imagen= new ImageIcon(list.get(image1Index).getImage());
+        Icon icono = new ImageIcon(imagen.getImage().getScaledInstance(lbl_image1.getWidth(), lbl_image1.getHeight(), Image.SCALE_DEFAULT));
+        lbl_image1.setIcon(icono);
+        
+        ImageIcon imagen2= new ImageIcon(list.get(image2Index).getImage());
+        Icon icono2 = new ImageIcon(imagen2.getImage().getScaledInstance(lbl_image2.getWidth(), lbl_image2.getHeight(), Image.SCALE_DEFAULT));
+        lbl_image2.setIcon(icono2);
+                
+    }
+    
+    public void saveWeapon(int index){
+       ArrayList<Weapon> list = WeaponFactory.getValues();
     }
 
     /**
@@ -47,6 +74,9 @@ public class NewCharacter extends javax.swing.JFrame {
         btn_life = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(800, 657));
+        setResizable(false);
+        setSize(new java.awt.Dimension(800, 657));
 
         lbl_image2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -97,8 +127,18 @@ public class NewCharacter extends javax.swing.JFrame {
         });
 
         btn_prev.setText("<");
+        btn_prev.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_prevActionPerformed(evt);
+            }
+        });
 
         btn_next.setText(">");
+        btn_next.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_nextActionPerformed(evt);
+            }
+        });
 
         btn_level.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
 
@@ -130,11 +170,11 @@ public class NewCharacter extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(40, 40, 40)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(scrollbar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btn_addImage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lbl_addImage, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lbl_addImage, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -168,11 +208,11 @@ public class NewCharacter extends javax.swing.JFrame {
                                     .addComponent(btn_cost, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addComponent(btn_life, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(btn_damage, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(86, 86, 86))
+                .addGap(21, 21, 21))
             .addGroup(layout.createSequentialGroup()
-                .addGap(54, 54, 54)
-                .addComponent(btn_create, javax.swing.GroupLayout.PREFERRED_SIZE, 685, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(45, 45, 45)
+                .addComponent(btn_create, javax.swing.GroupLayout.PREFERRED_SIZE, 660, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(48, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -183,9 +223,9 @@ public class NewCharacter extends javax.swing.JFrame {
                         .addComponent(lbl_addImage, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btn_addImage, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                         .addComponent(scrollbar1, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(37, 37, 37))
+                        .addGap(24, 24, 24))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
@@ -206,9 +246,9 @@ public class NewCharacter extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
                             .addComponent(btn_level, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(26, 26, 26)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+                                .addGap(26, 26, 26)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lbl_image1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(lbl_image2, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -217,8 +257,9 @@ public class NewCharacter extends javax.swing.JFrame {
                                         .addComponent(btn_prev)))
                                 .addGap(7, 7, 7))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btn_next)
-                                .addGap(65, 65, 65)))
+                                .addGap(61, 61, 61)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btn_image1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btn_image2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -258,6 +299,28 @@ public class NewCharacter extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_damageActionPerformed
 
+    private void btn_nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_nextActionPerformed
+        image1Index=image2Index;
+        if(image2Index==23){
+            image2Index=0;
+        }
+        else{
+            image2Index++;
+        }
+        chargePrototypes();
+    }//GEN-LAST:event_btn_nextActionPerformed
+
+    private void btn_prevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_prevActionPerformed
+        image2Index=image1Index;
+        if(image1Index==0){
+            image1Index=23;
+        }
+        else{
+            image1Index--;
+        }
+        chargePrototypes();
+    }//GEN-LAST:event_btn_prevActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -288,7 +351,11 @@ public class NewCharacter extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new NewCharacter().setVisible(true);
+                try {
+                    new NewCharacter().setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(NewCharacter.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
