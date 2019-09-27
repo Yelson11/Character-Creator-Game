@@ -35,6 +35,7 @@ public class Controller {
     private Image image;
     private static Controller controller;
     private static int indexCharacter;
+    private Character currentCharacter;
 
     public Controller() throws IOException {
         startPrototypes();
@@ -100,14 +101,33 @@ public class Controller {
             indexCharacter = 0;
         else if (indexCharacter < 0)
             indexCharacter = CharacterFactory.getValues().size() - 1;
-        Character character = (Character) CharacterFactory.getValues().get(indexCharacter);
-        image = ImageIO.read(new File(character.getImages().get(0)));
+        currentCharacter = (Character) CharacterFactory.getValues().get(indexCharacter);
+        image = ImageIO.read(new File(currentCharacter.getImages().get(0)));
         image = image.getScaledInstance(250, 250, Image.SCALE_DEFAULT); 
     }
     
     public void draw(Graphics g){
         g.drawImage(image, 300, 220, null);
     }
+    
+    //Generate getters and setters
+
+    public HashMap<String, IPrototype<Character>> getCharacterList() {
+        return characterList;
+    }
+
+    public void setCharacterList(HashMap<String, IPrototype<Character>> characterList) {
+        this.characterList = characterList;
+    }
+
+    public Character getCurrentCharacter() {
+        return currentCharacter;
+    }
+
+    public void setCurrentCharacter(Character currentCharacter) {
+        this.currentCharacter = currentCharacter;
+    }
+    
     
     //Crea los prototipos de armas predefinidos en el juego
     private void createWeapons(){
@@ -461,27 +481,14 @@ public class Controller {
                 .addUsedWeapon(WeaponFactory.getPrototype("heal"))
                 .build();
         
-        Character lebron = new Character.CharacterBuilder()
-                .addName("lebron")
-                .addSpace(1)
-                .addLevel(1)
-                .addCost(30)
-                .addLife(20)
-                .addImage("src/images/characters/lebron.png")
-                .addLevelRequired(1)
-                .addUsedWeapon(WeaponFactory.getPrototype("punch"))
-                .addUsedWeapon(WeaponFactory.getPrototype("basketball"))
-                .build();
-        
+ 
         Character link = new Character.CharacterBuilder()
                 .addName("link")
                 .addSpace(1)
                 .addLevel(1)
                 .addCost(400)
                 .addLife(500)
-                .addImage("src/images/characters/link_1.png")
                 .addImage("src/images/characters/link_2.png")
-                .addImage("src/images/characters/link_3.png")
                 .addLevelRequired(1)
                 .addUsedWeapon(WeaponFactory.getPrototype("punch"))
                 .addUsedWeapon(WeaponFactory.getPrototype("shield"))
@@ -520,8 +527,6 @@ public class Controller {
                 .addCost(200)
                 .addLife(80)
                 .addImage("src/images/characters/naruto_1.png")
-                .addImage("src/images/characters/naruto_2.png")
-                .addImage("src/images/characters/naruto_3.png")
                 .addLevelRequired(1)
                 .addUsedWeapon(WeaponFactory.getPrototype("punch"))
                 .addUsedWeapon(WeaponFactory.getPrototype("rasengan"))
@@ -575,7 +580,6 @@ public class Controller {
         CharacterFactory.addPrototype("link"     , link);
         CharacterFactory.addPrototype("messi"    , messi);
         CharacterFactory.addPrototype("zelda"    , zelda);
-        CharacterFactory.addPrototype("lebron"   , lebron);
         CharacterFactory.addPrototype("raptor"   , raptor);
         CharacterFactory.addPrototype("healer"   , healer);
         CharacterFactory.addPrototype("naruto"   , naruto);

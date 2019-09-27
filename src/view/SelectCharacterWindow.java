@@ -47,6 +47,7 @@ public class SelectCharacterWindow extends javax.swing.JFrame{
         controller.draw(g);
         btnRight.updateUI();
         btnLeft.updateUI();
+        btnNext.updateUI();
     }
 
     /**
@@ -60,6 +61,7 @@ public class SelectCharacterWindow extends javax.swing.JFrame{
 
         btnRight = new javax.swing.JButton();
         btnLeft = new javax.swing.JButton();
+        btnNext = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -73,6 +75,19 @@ public class SelectCharacterWindow extends javax.swing.JFrame{
 
         btnLeft.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnLeft.setText("<");
+        btnLeft.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLeftActionPerformed(evt);
+            }
+        });
+
+        btnNext.setFont(new java.awt.Font("Courier New", 0, 18)); // NOI18N
+        btnNext.setText("NEXT");
+        btnNext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNextActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -81,18 +96,24 @@ public class SelectCharacterWindow extends javax.swing.JFrame{
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(166, 166, 166)
                 .addComponent(btnLeft)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 420, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnRight)
                 .addGap(128, 128, 128))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(308, Short.MAX_VALUE)
+                .addComponent(btnNext, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(290, 290, 290))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(258, 258, 258)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnLeft, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnRight, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(287, Short.MAX_VALUE))
+                    .addComponent(btnLeft)
+                    .addComponent(btnRight, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 203, Short.MAX_VALUE)
+                .addComponent(btnNext, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(44, 44, 44))
         );
 
         pack();
@@ -106,6 +127,19 @@ public class SelectCharacterWindow extends javax.swing.JFrame{
         }
         repaint();
     }//GEN-LAST:event_btnRightActionPerformed
+
+    private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
+        System.out.println(controller.getCurrentCharacter().getName());
+    }//GEN-LAST:event_btnNextActionPerformed
+
+    private void btnLeftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLeftActionPerformed
+        try {
+            controller.changeImage(-1);
+        } catch (IOException ex) {
+            Logger.getLogger(SelectCharacterWindow.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        repaint();
+    }//GEN-LAST:event_btnLeftActionPerformed
 
     /**
      * @param args the command line arguments
@@ -151,6 +185,7 @@ public class SelectCharacterWindow extends javax.swing.JFrame{
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLeft;
+    private javax.swing.JButton btnNext;
     private javax.swing.JButton btnRight;
     // End of variables declaration//GEN-END:variables
 }
